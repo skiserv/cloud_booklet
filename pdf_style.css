@@ -1,0 +1,95 @@
+@page {
+    @bottom-center {
+        content: counter(page);
+    }
+
+    ;
+    margin: 1em 1em;
+}
+
+h1,
+h2,
+h3,
+.subtitle,
+blockquote,
+#version_date {
+    font-family: monospace;
+    font-weight: lighter;
+}
+
+#title {
+    font-size: 5em;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 2em;
+}
+
+#version_date {
+    text-align: center;
+    font-size: 1.2em;
+}
+
+/* Un retour à la page avant chaque nouvelle chanson */
+h2 {
+    page-break-before: always;
+}
+
+
+/** Lister ici les chansons sans retour à la page*/
+/* {
+page-break-before: none;
+margin-top: 5em; 
+}*/
+
+/* TOC = Sommaire */
+#title-summary {
+    page-break-before: none;
+}
+
+#summary {
+    position: absolute;
+    width: 100%;
+    bottom: 1em;
+}
+
+#summary ul {
+    column-count: 2;
+    column-gap: 5em;
+}
+
+#summary li a::after {
+    content: target-counter(attr(href), page);
+    float: right;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+blockquote {
+    text-align: right;
+}
+
+.content {
+    column-count: 2;
+    column-fill: auto;
+}
+
+/* Ne pas couper une strophe ou un couplet en deux
+lors d'un changement de colone ou de page */
+.content p {
+    break-inside: avoid;
+}
+
+h2,
+blockquote {
+    column-span: all;
+}

@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    /* Color scheme */
+
+    --textcolor: #121212;
+    --bgcolor: #fff;
+    --highlight: #2749c9;
+
+}
+
+body {
+    font-size: 18px;
+    font-family: system-ui, sans-serif;
+    line-height: 1.4;
+    color: var(--textcolor);
+    background: var(--bgcolor);
+    position: relative;
+    max-width: 64em;
+    margin: 0 auto;
+}
+
+/* ------- Sections ------- */
+
+section {
+    padding: calc(6em + 5vw) 5vw 8vw 5vw;
+    /* ! Everything below is needed ! */
+    display: none;
+    position: absolute;
+    top: 0;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--bgcolor);
+}
+
+section:target {
+    /* Show section */
+    display: block;
+}
+
+section#home {
+    /* Show #home by default */
+    display: block;
+}
+
+/* ------- Header ------- */
+
+header {
+    padding: 5vw 5vw 0 5vw;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    font-family: monospace;
+    font-weight: lighter;
+}
+
+header h1 {
+    font-size: 1em;
+    flex: 1;
+    /* pushes nav to the right */
+    white-space: nowrap;
+    padding: 0 5vw .5em 0;
+}
+
+nav a:not(:last-of-type) {
+    margin-right: 1.5vw;
+}
+
+/* ------- General ------- */
+
+a {
+    text-decoration: none;
+    color: var(--highlight);
+}
+
+a:hover {
+    border-bottom: 1px solid;
+}
+
+section h1 {
+    font-size: 1em;
+    margin: 0 0 1em 0;
+}
+
+h2,
+h3,
+h4 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 1.6em 0 .6em 0;
+}
+
+p,
+ul,
+ol {
+    max-width: 60ch;
+    /* Limit line-length to 60 characters */
+    margin-bottom: .6em;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul li::marker {
+    content: "\2022   ";
+}
+
+li {
+    margin-bottom: .2em;
+}
+
+ul,
+ol {
+    padding-left: 2ch;
+}
+
+b,
+strong {
+    font-weight: 600;
+}
+
+small {
+    font-size: .85em;
+}
+
+hr {
+    height: 1px;
+    border: 0;
+    background: currentColor;
+    opacity: .1;
+    margin: 1.2em 0;
+}
+
+blockquote {
+    padding-left: 2ch;
+    opacity: .7;
+    margin-bottom: .6em;
+    position: relative;
+}
+
+blockquote:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .3em;
+    bottom: .3em;
+    background: currentColor;
+    width: 1px;
+    opacity: .2;
+}
+
+/* External links */
+
+a[href*="//"]:after {
+    font-weight: 300;
+    font-size: .85em;
+    content: "\2197";
+    /* top right arrow: â†— */
+    color: var(--textcolor);
+    opacity: .25;
+}
+
+a[href*="//"]:hover:after {
+    color: var(--highlight);
+    opacity: 1;
+}
+
+/* ------- Smaller screens ------- */
+
+@media only screen and (max-width: 680px) {
+    body {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    nav {
+        width: 100%;
+    }
+
+    /* Fix for older webkit versions */
+}
+
+/* ------- Print ------- */
+@media print {
+    nav {
+        display: none;
+    }
+}
