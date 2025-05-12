@@ -32,6 +32,11 @@ $LANG = "";         # The language of the content for website medatada [en | fr 
 
 $PWA_THEME_COLOR = "";
 $PWA_BACKGROUND_COLOR = "";
+
+$LOGO_FILE = "";    # logo file path
+$LOGO_SIZE = "";    # eg `500x500`
+$LOGO_TYPE = "";    # eg `image/png`
+
 ```
 
 For the PWA you should also add an icon as `icon.svg` with a size of `192x192`.

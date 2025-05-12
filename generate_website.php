@@ -28,6 +28,8 @@ fwrite($index_file, '
     <link rel="manifest" href="manifest.json">
     
     <link rel="stylesheet" href="website_style.css">
+
+    <link rel="icon" type="image/x-icon" href="/' . $LOGO_FILE . '">
 </head>
 
 <body>
@@ -85,9 +87,9 @@ file_put_contents(
         "scope": "./",
         "icons": [
             {
-                "src": "icon.svg",
-                "sizes": "192x192",
-                "type": "image/svg+xml"
+                "src": "' . $LOGO_FILE . '",
+                "sizes": "' . $LOGO_SIZE . '",
+                "type": "' . $LOGO_TYPE . '"
             }
         ],
         "theme_color": "' . $PWA_THEME_COLOR . '",
