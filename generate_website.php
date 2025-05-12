@@ -7,8 +7,8 @@ include_once("config.php");
 echo '+++ Website generation started <br/>';
 echo '+++ Fetching the cloud content, this may take some time. <br/>';
 
-
-$content = (new ContentGenerator($BASE_URL, $KEY, $PWD))->generateBodyAndSummary();
+$contentGenerator = new ContentGenerator($BASE_URL, $KEY, $PWD);
+$content = $contentGenerator->generateBodyAndSummary();
 $body = $content["body"];
 $summary = $content["summary"];
 
@@ -36,8 +36,15 @@ fwrite($index_file, '
             <a href="#home">' . $TITLE . '</a>
         </h1>
         <nav>
-        <a href="#home">' . $SUMMARY_TITLE . '</a>
-        <a href="#about">' . $ABOUT_TITLE . '</a>
+        <a href="#home">' . $SUMMARY_TITLE . '</a>');
+
+foreach ($PAGES as $text => $id) {
+    fwrite($index_file, '
+        <a href="#' . explode(".", $id)[0] . '">' . $text . '</a>');
+}
+
+
+fwrite($index_file, '
         </nav>
     </header>
 
@@ -49,14 +56,17 @@ foreach ($summary as $i) {
 }
 fwrite($index_file, '
         </ul>
-    </section>
+    </section>');
 
-    <section id="about">
-        <p>' . $SUBTITLE . '</p>
-        <p>' . $ABOUT_CONTENT . '</p>
-        <p>Website created : ' . (new DateTime())->format("d/n/y") . '</p>
-    </section>
+foreach ($contentGenerator->getSpecials($PAGES) as $id => $content) {
+    fwrite($index_file, '
+            <section id="' . explode(".", $id)[0] . '">
+            ' . $content . '
+            </section>
+        ');
+}
 
+fwrite($index_file, '
     ' . $body . '
 </body>
 

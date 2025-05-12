@@ -20,8 +20,11 @@ $PWD = "";          # The password of the shared folder
 $TITLE = "";        # The title of the website/PDF
 $SUBTITLE = "";     # The subtitle ...
 
-$ABOUT_TITLE = "";  # The name of the "about" page for the website ("About" is a nice one)
-$ABOUT_CONTENT = "";# The content of the "about" page for the website
+# Some special pages that will be added in the header. Markdown file should start with _
+$PAGES = [
+    "About" => "_about.md",
+    "How to edit" => "_how_to_edit.md"
+];
 
 $SUMMARY_TITLE = "";# The title of the summary (website page / PDF summary in first page)
 

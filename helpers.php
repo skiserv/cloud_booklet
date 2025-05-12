@@ -16,8 +16,7 @@ class WebdavFileGetter
         public string $base_url,
         public string $key,
         public string $pwd,
-    ) {
-    }
+    ) {}
 
     public function make_request(
         string $path,
@@ -108,6 +107,11 @@ class ContentGenerator
 
         foreach ($this->webdavGetter->getFilesPath() as $path) {
 
+            $explodedPath = explode("/", $path);
+            if (str_starts_with(end($explodedPath), "_")) {
+                continue;
+            }
+
             $file_content = $this->webdavGetter->make_request($path);
 
             $Parsedown = new Parsedown();
@@ -123,5 +127,16 @@ class ContentGenerator
         }
 
         return ["body" => $body, "summary" => $summary];
+    }
+
+    public function getSpecials($pages)
+    {
+        $result = [];
+        foreach ($pages as $id) {
+            $file_content = $this->webdavGetter->make_request('/public.php/webdav/' . $id);
+            $Parsedown = new Parsedown();
+            $result[$id] = $Parsedown->text($file_content);
+        }
+        return $result;
     }
 }
