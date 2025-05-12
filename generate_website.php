@@ -79,7 +79,7 @@ echo "+++ `index.html` created <br/>";
 file_put_contents(
     "manifest.json",
     '{
-        "name": ' . $TITLE . ',
+        "name": "' . $TITLE . '",
         "short_name": "' . $TITLE . '",
         "start_url": "./index.html",
         "scope": "./",
