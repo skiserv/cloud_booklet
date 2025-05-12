@@ -119,6 +119,11 @@ class ContentGenerator
 
             // extract title
             $title = (new SimpleXMLElement("<root>" . $html . "</root>"))->children()[0];
+
+            if (!$title['id']) {
+                throw new Exception("Missing title for file " . $path);
+            }
+
             $id = $title["id"]->__toString();
             $text = $title->__toString();
             $summary[] = [$id, $text];
