@@ -469,7 +469,7 @@ class Parsedown
     protected function blockHeader($Line)
     {
         if (isset($Line['text'][1])) {
-            $level = 2;  // CHANGED
+            $level = 1;  // CHANGED
 
             while (isset($Line['text'][$level]) and $Line['text'][$level] === '#') {
                 $level++;
@@ -483,7 +483,7 @@ class Parsedown
 
             $Block = array(
                 'element' => array(
-                    'name' => 'h' . min(6, $level),
+                    'name' => 'h' . min(6, $level + 1),
                     'text' => $text,
                     'handler' => 'line',
                     'attributes' => ['id' => strtolower(str_replace(' ', '-', $text))],  //CHANGED
@@ -1522,7 +1522,23 @@ class Parsedown
     # Read-Only
 
     protected $specialCharacters = array(
-        '\\', '`', '*', '_', '{', '}', '[', ']', '(', ')', '>', '#', '+', '-', '.', '!', '|',
+        '\\',
+        '`',
+        '*',
+        '_',
+        '{',
+        '}',
+        '[',
+        ']',
+        '(',
+        ')',
+        '>',
+        '#',
+        '+',
+        '-',
+        '.',
+        '!',
+        '|',
     );
 
     protected $StrongRegex = array(
@@ -1538,18 +1554,61 @@ class Parsedown
     protected $regexHtmlAttribute = '[a-zA-Z_:][\w:.-]*(?:\s*=\s*(?:[^"\'=<>`\s]+|"[^"]*"|\'[^\']*\'))?';
 
     protected $voidElements = array(
-        'area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source',
+        'area',
+        'base',
+        'br',
+        'col',
+        'command',
+        'embed',
+        'hr',
+        'img',
+        'input',
+        'link',
+        'meta',
+        'param',
+        'source',
     );
 
     protected $textLevelElements = array(
-        'a', 'br', 'bdo', 'abbr', 'blink', 'nextid', 'acronym', 'basefont',
-        'b', 'em', 'big', 'cite', 'small', 'spacer', 'listing',
-        'i', 'rp', 'del', 'code',          'strike', 'marquee',
-        'q', 'rt', 'ins', 'font',          'strong',
-        's', 'tt', 'kbd', 'mark',
-        'u', 'xm', 'sub', 'nobr',
-        'sup', 'ruby',
-        'var', 'span',
-        'wbr', 'time',
+        'a',
+        'br',
+        'bdo',
+        'abbr',
+        'blink',
+        'nextid',
+        'acronym',
+        'basefont',
+        'b',
+        'em',
+        'big',
+        'cite',
+        'small',
+        'spacer',
+        'listing',
+        'i',
+        'rp',
+        'del',
+        'code',
+        'strike',
+        'marquee',
+        'q',
+        'rt',
+        'ins',
+        'font',
+        'strong',
+        's',
+        'tt',
+        'kbd',
+        'mark',
+        'u',
+        'xm',
+        'sub',
+        'nobr',
+        'sup',
+        'ruby',
+        'var',
+        'span',
+        'wbr',
+        'time',
     );
 }
