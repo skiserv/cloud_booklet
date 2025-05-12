@@ -28,6 +28,7 @@ fwrite($index_file, '
     <link rel="manifest" href="manifest.json">
     
     <link rel="stylesheet" href="website_style.css">
+    <link rel="stylesheet" href="custom/style.css">
 
     <link rel="icon" type="image/x-icon" href="/' . $LOGO_FILE . '">
 </head>

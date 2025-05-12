@@ -2,6 +2,7 @@
 config.php
 icon.svg
 logo.*
+custom
 
 # Generated files
 index.html
