@@ -30,7 +30,7 @@ fwrite($index_file, '
     <link rel="stylesheet" href="website_style.css">
     <link rel="stylesheet" href="custom/style.css">
 
-    <link rel="icon" type="image/x-icon" href="/' . $LOGO_FILE . '">
+    <link rel="icon" type="image/x-icon" href="/custom/' . $LOGO_FILE . '">
 </head>
 
 <body>
@@ -88,7 +88,7 @@ file_put_contents(
         "scope": "./",
         "icons": [
             {
-                "src": "' . $LOGO_FILE . '",
+                "src": "/custom/' . $LOGO_FILE . '",
                 "sizes": "' . $LOGO_SIZE . '",
                 "type": "' . $LOGO_TYPE . '"
             }
