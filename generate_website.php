@@ -1,6 +1,8 @@
 <?php
 include_once("Parsedown.php");
 include_once("helpers.php");
+include_once("Text.php");
+include_once("Summary.php");
 
 include_once("config.php");
 
@@ -9,7 +11,7 @@ echo '+++ Fetching the cloud content, this may take some time. <br/>';
 
 $contentGenerator = new ContentGenerator($BASE_URL, $KEY, $PWD);
 $content = $contentGenerator->generateBodyAndSummary();
-$body = $content["body"];
+$texts = $content["texts"];
 $summary = $content["summary"];
 
 echo '+++ Content fetched <br/>';
@@ -51,14 +53,19 @@ fwrite($index_file, '
         </nav>
     </header>
 
-    <section id="home">
-        <ul>');
-foreach ($summary as $i) {
-    fwrite($index_file, '
-            <li><a href="#section-' . $i[0] . '">' . $i[1] . '</a></li>');
+    <section id="home">');
+
+foreach ($summary->getByFirstLetters() as $letter => $letterSummary) {
+    fwrite($index_file, '<h2>' . $letter . '</h2>
+    <ul>');
+    foreach ($letterSummary as $id => $title) {
+        fwrite($index_file, '
+            <li><a href="#section-' . $id . '">' . $title . '</a></li>');
+    }
+    fwrite($index_file, '</ul>');
 }
+
 fwrite($index_file, '
-        </ul>
     </section>');
 
 foreach ($contentGenerator->getSpecials($PAGES) as $id => $content) {
@@ -69,8 +76,12 @@ foreach ($contentGenerator->getSpecials($PAGES) as $id => $content) {
         ');
 }
 
+foreach ($texts as $text) {
+    fwrite($index_file, '
+    <section id="section-' . $text->id . '">' . $text->getContentAsHTML() . '</section>');
+}
+
 fwrite($index_file, '
-    ' . $body . '
 </body>
 
 </html>');

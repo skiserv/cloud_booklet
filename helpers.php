@@ -102,8 +102,8 @@ class ContentGenerator
      */
     function generateBodyAndSummary(): array
     {
-        $body = "";
-        $summary = [];
+        $texts = [];
+        $summary = new Summary();
 
         foreach ($this->webdavGetter->getFilesPath() as $path) {
 
@@ -112,26 +112,13 @@ class ContentGenerator
                 continue;
             }
 
-            $file_content = $this->webdavGetter->make_request($path);
-
-            $Parsedown = new Parsedown();
-            $html = $Parsedown->text($file_content);
-
-            // extract title
-            $title = (new SimpleXMLElement("<root>" . $html . "</root>"))->children()[0];
-
-            if (!$title['id']) {
-                throw new Exception("Missing title for file " . $path);
-            }
-
-            $id = $title["id"]->__toString();
-            $text = $title->__toString();
-            $summary[] = [$id, $text];
-
-            $body .= '<section id="section-' . $id . '">' . $html . '</section>';
+            $file = $this->webdavGetter->make_request($path);
+            $text = TextFactory::createFromMarkdownFile($file);
+            $summary->registerText($text);
+            $texts[] = $text;
         }
 
-        return ["body" => $body, "summary" => $summary];
+        return ["texts" => $texts, "summary" => $summary];
     }
 
     public function getSpecials($pages)
