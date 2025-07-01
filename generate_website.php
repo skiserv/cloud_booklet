@@ -16,6 +16,35 @@ $summary = $content["summary"];
 
 echo '+++ Content fetched <br/>';
 
+function writeSummary(Summary $summary, $file, ?string $tag = null)
+{
+    if ($tag) {
+        fwrite($file, '<h2>' . $tag . '</h2>');
+    }
+
+    fwrite($file, '<div id="tags">');
+
+    fwrite($file, '
+            <a href="#home">*</a>');
+    foreach ($summary->getTags() as $existingTag) {
+        fwrite($file, '
+            <a href="#tag-' . $existingTag . '">' . $existingTag . '</a>');
+    }
+    fwrite($file, '
+        </div>');
+
+    foreach ($summary->getByFirstLetters($tag) as $letter => $letterSummary) {
+        fwrite($file, '<h3>' . $letter . '</h3>
+    <ul>');
+        foreach ($letterSummary as $id => $title) {
+            fwrite($file, '
+            <li><a href="#section-' . $id . '">' . $title . '</a></li>');
+        }
+        fwrite($file, '</ul>');
+    }
+}
+
+
 $index_file = fopen("index.html", "w");
 fwrite($index_file, '
 <!DOCTYPE html>
@@ -55,18 +84,19 @@ fwrite($index_file, '
 
     <section id="home">');
 
-foreach ($summary->getByFirstLetters() as $letter => $letterSummary) {
-    fwrite($index_file, '<h2>' . $letter . '</h2>
-    <ul>');
-    foreach ($letterSummary as $id => $title) {
-        fwrite($index_file, '
-            <li><a href="#section-' . $id . '">' . $title . '</a></li>');
-    }
-    fwrite($index_file, '</ul>');
-}
+writeSummary($summary, $index_file);
 
 fwrite($index_file, '
     </section>');
+
+foreach ($summary->getTags() as $tag) {
+    fwrite($index_file, '
+    <section id="tag-' . $tag . '">');
+    writeSummary($summary, $index_file, $tag);
+    fwrite($index_file, '
+    </section>');
+}
+
 
 foreach ($contentGenerator->getSpecials($PAGES) as $id => $content) {
     fwrite($index_file, '
@@ -78,7 +108,15 @@ foreach ($contentGenerator->getSpecials($PAGES) as $id => $content) {
 
 foreach ($texts as $text) {
     fwrite($index_file, '
-    <section id="section-' . $text->id . '">' . $text->getContentAsHTML() . '</section>');
+    <section id="section-' . $text->id . '">' . $text->getContentAsHTML());
+
+    fwrite($index_file, '<div id="tags">');
+    foreach ($text->tags as $tag) {
+        fwrite($index_file, '
+            <a href="#tag-' . $tag . '">' . $tag . '</a>');
+    }
+    fwrite($index_file, '</div>
+    </section>');
 }
 
 fwrite($index_file, '
