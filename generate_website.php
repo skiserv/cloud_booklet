@@ -6,15 +6,15 @@ include_once("Summary.php");
 
 include_once("config.php");
 
-echo '+++ Website generation started <br/>';
-echo '+++ Fetching the cloud content, this may take some time. <br/>';
+echo "+++ Website generation started \n";
+echo "+++ Fetching the cloud content, this may take some time. \n";
 
 $contentGenerator = new ContentGenerator($BASE_URL, $KEY, $PWD);
 $content = $contentGenerator->generateBodyAndSummary();
 $texts = $content["texts"];
 $summary = $content["summary"];
 
-echo '+++ Content fetched <br/>';
+echo "+++ Content fetched \n";
 
 function writeSummary(Summary $summary, $file, ?string $tag = null)
 {
@@ -45,8 +45,8 @@ function writeSummary(Summary $summary, $file, ?string $tag = null)
 }
 
 
-$index_file = fopen("index.html", "w");
-fwrite($index_file, '
+$file = fopen("index.html", "w");
+fwrite($file, '
 <!DOCTYPE html>
 <html lang="' . $LANG . '">
 
@@ -73,33 +73,33 @@ fwrite($index_file, '
         <a href="#home">' . $SUMMARY_TITLE . '</a>');
 
 foreach ($PAGES as $text => $id) {
-    fwrite($index_file, '
+    fwrite($file, '
         <a href="#' . explode(".", $id)[0] . '">' . $text . '</a>');
 }
 
 
-fwrite($index_file, '
+fwrite($file, '
         </nav>
     </header>
 
     <section id="home">');
 
-writeSummary($summary, $index_file);
+writeSummary($summary, $file);
 
-fwrite($index_file, '
+fwrite($file, '
     </section>');
 
 foreach ($summary->getTags() as $tag) {
-    fwrite($index_file, '
+    fwrite($file, '
     <section id="tag-' . $tag . '">');
-    writeSummary($summary, $index_file, $tag);
-    fwrite($index_file, '
+    writeSummary($summary, $file, $tag);
+    fwrite($file, '
     </section>');
 }
 
 
 foreach ($contentGenerator->getSpecials($PAGES) as $id => $content) {
-    fwrite($index_file, '
+    fwrite($file, '
             <section id="' . explode(".", $id)[0] . '">
             ' . $content . '
             </section>
@@ -107,26 +107,26 @@ foreach ($contentGenerator->getSpecials($PAGES) as $id => $content) {
 }
 
 foreach ($texts as $text) {
-    fwrite($index_file, '
+    fwrite($file, '
     <section id="section-' . $text->id . '">' . $text->getContentAsHTML());
 
-    fwrite($index_file, '<div id="tags">');
+    fwrite($file, '<div id="tags">');
     foreach ($text->tags as $tag) {
-        fwrite($index_file, '
+        fwrite($file, '
             <a href="#tag-' . $tag . '">' . $tag . '</a>');
     }
-    fwrite($index_file, '</div>
+    fwrite($file, '</div>
     </section>');
 }
 
-fwrite($index_file, '
+fwrite($file, '
 </body>
 
 </html>');
 
-fclose($index_file);
+fclose($file);
 
-echo "+++ `index.html` created <br/>";
+echo "+++ `index.html` created \n";
 
 file_put_contents(
     "manifest.json",
@@ -147,5 +147,5 @@ file_put_contents(
         "display": "standalone"
     }',
 );
-echo "+++ `manifest.json created <br/>";
-echo '+++ Website generated with success <br/>';
+echo "+++ `manifest.json created \n";
+echo "+++ Website generated with success \n";
