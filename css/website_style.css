@@ -21,7 +21,7 @@ body {
 }
 
 section {
-  padding: calc(6em + 5vw) 5vw 8vw 5vw;
+  padding: calc(2em + 5vw) 5vw 8vw 5vw;
   display: none; /* Hidden by default */
   position: absolute;
   top: 0;
@@ -43,31 +43,36 @@ section#home {
 /* ------- Header ------- */
 header {
   box-sizing: border-box;
-  background-color: red;
-  padding: 0 5vw;
+  padding: 1rem 5vw;
+
   display: flex;
   flex-wrap: wrap;
+  gap: 0.5rem;
+
   position: absolute;
   width: 100%;
   z-index: 2;
 }
 
-header h1 {
-  background-color: blue;
-  font-size: 1em;
-  flex: 1; /* pushes nav to the right */
-  white-space: nowrap;
-  display: block;
+header > * {
+  flex: 1 1 auto;
 }
+
+header h1 {
+  margin: 0;
+  font-size: 1em;
+  white-space: nowrap;
+}
+
 nav {
-  background-color: yellow;
+  gap: 1rem;
+  display: flex;
+  align-items: center;
 }
 
 nav a {
-  display: inline-block;
-  text-align: center;
-}
+  flex: 1 1 auto;
+  height: 1.5rem;
 
-nav a:not(:last-of-type) {
-  margin-right: 1.5vw;
+  text-align: center;
 }
