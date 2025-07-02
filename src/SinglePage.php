@@ -29,7 +29,7 @@ class SinglePage
     
     <link rel="manifest" href="manifest.json">
     
-    <link rel="stylesheet" href="website_style.css">
+    <link rel="stylesheet" href="/css/website_style.css">
     <link rel="stylesheet" href="custom/style.css">
 
     <link rel="icon" type="image/x-icon" href="/custom/' . $this->conf::LOGO_FILE . '">';

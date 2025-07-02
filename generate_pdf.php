@@ -17,10 +17,10 @@ $summary = $content["summary"];
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
     <title><?php echo $TITLE ?></title>
 
-    <link href="pdf_style.css" rel="stylesheet" type="text/css">
+    <link href="/css/pdf_style.css" rel="stylesheet" type="text/css">
 
-    <link href="./paged_interface.css" rel="stylesheet" type="text/css" />
-    <script src="./paged.polyfill.js"></script>
+    <link href="/css/paged_interface.css" rel="stylesheet" type="text/css" />
+    <script src="/paged.polyfill.js"></script>
 </head>
 
 <body>

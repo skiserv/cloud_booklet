@@ -42,7 +42,9 @@ section#home {
 
 /* ------- Header ------- */
 header {
-  padding: 5vw 5vw 0 5vw;
+  box-sizing: border-box;
+  background-color: red;
+  padding: 0 5vw;
   display: flex;
   flex-wrap: wrap;
   position: absolute;
@@ -51,10 +53,19 @@ header {
 }
 
 header h1 {
+  background-color: blue;
   font-size: 1em;
   flex: 1; /* pushes nav to the right */
   white-space: nowrap;
-  padding: 0 5vw 0.5em 0;
+  display: block;
+}
+nav {
+  background-color: yellow;
+}
+
+nav a {
+  display: inline-block;
+  text-align: center;
 }
 
 nav a:not(:last-of-type) {

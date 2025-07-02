@@ -1,9 +1,9 @@
 <?php
-include_once("Parsedown.php");
-include_once("helpers.php");
-include_once("Text.php");
-include_once("Summary.php");
-include_once("SinglePage.php");
+include_once("src/Parsedown.php");
+include_once("src/helpers.php");
+include_once("src/Text.php");
+include_once("src/Summary.php");
+include_once("src/SinglePage.php");
 
 include_once("config.php");
 
