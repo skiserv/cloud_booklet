@@ -13,30 +13,32 @@ A `config.php` file is needed at the root of the directory to use this project. 
 ```php
 # config.php
 <?php
-$BASE_URL = "";     # The root path of your cloud domain
-$KEY = "";          # The ID of the shared folder
-$PWD = "";          # The password of the shared folder
+class Config
+{
+    const BASE_URL = "";     # The root path of your cloud domain
+    const KEY = "";          # The ID of the shared folder
+    const PWD = "";          # The password of the shared folder
 
-$TITLE = "";        # The title of the website/PDF
-$SUBTITLE = "";     # The subtitle ...
+    const TITLE = "";        # The title of the website/PDF
+    const SUBTITLE = "";     # The subtitle ...
 
 # Some special pages that will be added in the header. Markdown file should start with _
-$PAGES = [
-    "About" => "_about.md",
-    "How to edit" => "_how_to_edit.md"
-];
+    const PAGES = [
+        "About" => "_about.md",
+        "How to edit" => "_how_to_edit.md"
+    ];
 
-$SUMMARY_TITLE = "";# The title of the summary (website page / PDF summary in first page)
+    const SUMMARY_TITLE = "";# The title of the summary (website page / PDF summary in first page)
 
-$LANG = "";         # The language of the content for website medatada [en | fr | ...]
+    const LANG = "";         # The language of the content for website medatada [en | fr | ...]
 
-$PWA_THEME_COLOR = "";
-$PWA_BACKGROUND_COLOR = "";
+    const PWA_THEME_COLOR = "";
+    const PWA_BACKGROUND_COLOR = "";
 
-$LOGO_FILE = "";    # logo file path
-$LOGO_SIZE = "";    # eg `500x500`
-$LOGO_TYPE = "";    # eg `image/png`
-
+    const LOGO_FILE = "";    # logo file path
+    const LOGO_SIZE = "";    # eg `500x500`
+    const LOGO_TYPE = "";    # eg `image/png`
+}
 ```
 
 For the PWA you should also add an icon as `icon.svg` with a size of `192x192`.
