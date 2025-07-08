@@ -58,14 +58,15 @@ class SinglePage
     public function getSummary(Summary $summary, ?string $tag = null): string
     {
         $html = "";
+
+        $html = $html . $this->getTags($summary->getTags(), withHome: true);
+
         if ($tag) {
             $html = $html . '<h2>' . $tag . '</h2>';
         }
 
-        $html = $html . $this->getTags($summary->getTags(), withHome: true);
-
         foreach ($summary->getByFirstLetters($tag) as $letter => $letterSummary) {
-            $html = $html . '<h3>' . $letter . '</h3><ul>';
+            $html = $html . '<div class="toc"><h3>' . $letter . '</h3><ul>';
             foreach ($letterSummary as $id => $text) {
                 $html = $html . '
             <li>
@@ -75,7 +76,7 @@ class SinglePage
                 </a>
                     </li>';
             }
-            $html = $html . '</ul>';
+            $html = $html . '</ul></div>';
         }
 
         return $html;
