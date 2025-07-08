@@ -58,4 +58,4 @@ file_put_contents(
     }',
 );
 
-echo 'Generation succeed ! 🥳 Go back to <a href="index.html">website</a> now';
+echo "Generation succeed ! 🥳 Go back to <a href=\"index.html\">website</a> now\n";
