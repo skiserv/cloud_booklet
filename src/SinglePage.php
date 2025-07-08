@@ -66,9 +66,14 @@ class SinglePage
 
         foreach ($summary->getByFirstLetters($tag) as $letter => $letterSummary) {
             $html = $html . '<h3>' . $letter . '</h3><ul>';
-            foreach ($letterSummary as $id => $title) {
+            foreach ($letterSummary as $id => $text) {
                 $html = $html . '
-            <li><a href="#section-' . $id . '">' . $title . '</a></li>';
+            <li>
+                <a href="#section-' . $id . '">
+                    <span class="title">' . $text->title . '</span>
+                ' . ($text->lang ? ' <span class="lang">' . $text->lang . '</span>' : '') . '
+                </a>
+                    </li>';
             }
             $html = $html . '</ul>';
         }
@@ -78,7 +83,7 @@ class SinglePage
 
     public function getTags(array $tags, bool $withHome = false): string
     {
-        $html = '<div id="tags">';
+        $html = '<div class="tags">';
         if ($withHome) {
             $html = $html . '
                 <a href="#home">*</a>';

@@ -9,13 +9,13 @@ class Summary
 
     public function registerText(Text $text)
     {
-        $this->texts[$text->id] = $text->title;
+        $this->texts[$text->id] = $text;
 
         foreach ($text->tags as $tag) {
             if (!array_key_exists($tag, $this->textsByTags)) {
                 $this->textsByTags[$tag] = [];
             }
-            $this->textsByTags[$tag][$text->id] = $text->title;
+            $this->textsByTags[$tag][$text->id] = $text;
         }
     }
 
