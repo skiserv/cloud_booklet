@@ -73,7 +73,7 @@ class TextFactory
             $file,
             $matches,
         )) {
-            $result = substr($matches[0], strlen($name) + 2);
+            $result = str_replace("\n", '', substr($matches[0], strlen($name) + 2));
             $file = preg_replace($regex, "", $file);
         }
         return $result;
